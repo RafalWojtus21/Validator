@@ -6,18 +6,63 @@
 //
 
 import SwiftUI
+import Combine
 
 struct StringInputView: View {
     
     @Binding var stringData: String
+    @Environment(ValidatorImpl.self) private var validator
+    @State var subscribers: [AnyCancellable] = []
+    @State var validationMessage = ""
+    let valuesId: UUID
+    let type: UserDataType
+
     var placeHolder: String
     
     var body: some View {
+        VStack(spacing: 10) {
+            stringInputTextField
+            ValidationMessageView(validationMessage)
+                .frame(height: 20)
+        }
+    }
+    
+    private var stringInputTextField: some View {
         TextField(placeHolder, text: $stringData)
+            .inputTextfieldStyle()
+            .autocapitalization(.none)
+            .onChange(of: stringData) { oldValue, newValue in
+                validate()
+            }
+    }
+    
+    private func validate() {
+        let validationType: Validation.ValidationType? = switch type {
+        case .email:
+                .email
+        case .name:
+                .name
+        default:
+                nil
+        }
+        guard let validationType else { return }
+        
+        validator.validate(valuesId: valuesId, validationType, input: stringData)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.validationMessage = error.localizedDescription
+                }
+            } receiveValue: { _ in
+                self.validationMessage = ""
+            }
+            .store(in: &subscribers)
     }
     
 }
 
 #Preview {
-    StringInputView(stringData: .constant("Test input"), placeHolder: "Value")
+    StringInputView(stringData: .constant("Test input"), valuesId: .init(), type: .name, placeHolder: "Value")
 }

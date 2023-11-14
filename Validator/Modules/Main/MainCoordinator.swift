@@ -14,13 +14,14 @@ struct MainCoordinator: View {
     @StateObject var viewModel: ViewModel
     
     private let userSetup: [UserInfo] = [
-        .init(type: .string, description: "Name"),
-        .init(type: .string, description: "E-mail")
+        .init(type: .name, description: "Name"),
+        .init(type: .email, description: "E-mail")
     ]
     
     private let personalDetails: [UserInfo] = [
-        .init(type: .date, description: "Date of birth"),
-        .init(type: .integer, description: "Height")
+        .init(type: .date, description: "Birthdate"),
+        .init(type: .height, description: "Height [cm]"),
+        .init(type: .weight, description: "Weight [kg]"),
     ]
     
     // MARK: - User Interface
@@ -30,7 +31,8 @@ struct MainCoordinator: View {
             UserInfoView(viewModel: .init(dependencies: viewModel.dependencies, 
                                           navigation: viewModel,
                                           userSetup: .init(info: userSetup), 
-                                          personalDetails: .init(info: personalDetails)))
+                                          personalDetails: .init(info: personalDetails)), 
+                         validator: .init())
         }
     }
     

@@ -8,7 +8,9 @@
 import Foundation
 
 enum UserDataType {
+    case email
+    case name
     case date
-    case string
-    case integer
+    case height
+    case weight
 }

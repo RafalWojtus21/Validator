@@ -12,6 +12,7 @@ struct UserInfoView: View {
     // MARK: - Properties
     
     @StateObject var viewModel: ViewModel
+    @State var validator: ValidatorImpl
     @State private var message = ""
     
     // MARK: - User Interface
@@ -34,6 +35,10 @@ struct UserInfoView: View {
             }
         }
         .navigationTitle("Account")
+        .onAppear {
+            let ids = viewModel.personalDetails.info.compactMap { $0.id } + viewModel.userSetup.info.compactMap { $0.id }
+            validator.setValidationValues(ids)
+        }
     }
     
     private var userInformationView: some View {
@@ -47,6 +52,7 @@ struct UserInfoView: View {
         Section("User Setup") {
             ForEach(viewModel.userSetup.info) {
                 UserInputViewProvider(userInfo: $0)
+                    .environment(validator)
             }
         }
     }
@@ -55,6 +61,7 @@ struct UserInfoView: View {
         Section("Personal Information") {
             ForEach(viewModel.personalDetails.info) {
                 UserInputViewProvider(userInfo: $0)
+                    .environment(validator)
             }
         }
     }
@@ -73,13 +80,14 @@ struct UserInfoView: View {
             }
         }
         .buttonStyle(.plain)
+        .disabled(!validator.areInputsValid())
     }
     
 }
 
 struct UserInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        UserInfoView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), userSetup: .init(info: []), personalDetails: .init(info: [])))
+        UserInfoView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), userSetup: .init(info: []), personalDetails: .init(info: [])), validator: .init())
     }
 }
 
