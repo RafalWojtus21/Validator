@@ -30,16 +30,24 @@ extension UserInfoView {
         
         // MARK: - UI Properties
         
+        @Published var userName = ""
+        @Published var age = ""
+        @Published var height = ""
+        var userSetup: UserConfig
+        var personalDetails: UserConfig
+        
         // MARK: - Initialization
         
-        init(dependencies: Dependencies, navigation: Navigation) {
+        init(dependencies: Dependencies, navigation: Navigation, userSetup: UserConfig, personalDetails: UserConfig) {
             self.dependencies = dependencies
             self.navigation = navigation
+            self.userSetup = userSetup
+            self.personalDetails = personalDetails
             Logger.memory.info("UserInfoViewModel Dependencies init")
         }
         
         deinit {
-//            Logger.memory.info("UserInfoViewModel Dependencies deinit")
+            Logger.memory.info("UserInfoViewModel Dependencies deinit")
         }
         
         // MARK: - Public implementation

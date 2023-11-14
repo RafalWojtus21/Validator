@@ -44,11 +44,11 @@ extension MainCoordinator {
         init(dependencies: Dependencies, navigation: CoordinatorNavigation) {
             self.dependencies = dependencies
             self.coordinatorNavigation = navigation
-//            Logger.memory.info("MainCoordinator Dependencies init")
+            Logger.memory.info("MainCoordinator Dependencies init")
         }
         
         deinit {
-//            Logger.memory.info("MainCoordinator Dependencies deinit")
+            Logger.memory.info("MainCoordinator Dependencies deinit")
         }
         
         // MARK: - Public implementation

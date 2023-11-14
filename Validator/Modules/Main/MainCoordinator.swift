@@ -13,10 +13,25 @@ struct MainCoordinator: View {
     
     @StateObject var viewModel: ViewModel
     
+    private let userSetup: [UserInfo] = [
+        .init(type: .string, description: "Name"),
+        .init(type: .string, description: "E-mail")
+    ]
+    
+    private let personalDetails: [UserInfo] = [
+        .init(type: .date, description: "Date of birth"),
+        .init(type: .integer, description: "Height")
+    ]
+    
     // MARK: - User Interface
     
     var body: some View {
-        UserInfoView(viewModel: .init(dependencies: viewModel.dependencies, navigation: viewModel))
+        NavigationStack {
+            UserInfoView(viewModel: .init(dependencies: viewModel.dependencies, 
+                                          navigation: viewModel,
+                                          userSetup: .init(info: userSetup), 
+                                          personalDetails: .init(info: personalDetails)))
+        }
     }
     
 }

@@ -12,18 +12,74 @@ struct UserInfoView: View {
     // MARK: - Properties
     
     @StateObject var viewModel: ViewModel
+    @State private var message = ""
     
     // MARK: - User Interface
     
     var body: some View {
-        Text("Hello World")
+        VStack {
+            userInformationView
+        }
+        .listStyle(.plain)
+        .overlay {
+            VStack {
+                Spacer()
+                confirmButton
+                    .frame(height: 60)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(30)
+                    .padding(.leading, 40)
+                    .padding(.trailing, 40)
+            }
+        }
+        .navigationTitle("Account")
+    }
+    
+    private var userInformationView: some View {
+        Form {
+            userSetupSection
+            personalDetailsSection
+        }
+    }
+    
+    private var userSetupSection: some View {
+        Section("User Setup") {
+            ForEach(viewModel.userSetup.info) {
+                UserInputViewProvider(userInfo: $0)
+            }
+        }
+    }
+    
+    private var personalDetailsSection: some View {
+        Section("Personal Information") {
+            ForEach(viewModel.personalDetails.info) {
+                UserInputViewProvider(userInfo: $0)
+            }
+        }
+    }
+    
+    private var confirmButton: some View {
+        Button {
+        } label: {
+            HStack {
+                Image(systemName: "arrow.right")
+                    .font(.title)
+                    .foregroundColor(.white)
+                Text("Confirm")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+            }
+        }
+        .buttonStyle(.plain)
     }
     
 }
 
 struct UserInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        UserInfoView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation()))
+        UserInfoView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), userSetup: .init(info: []), personalDetails: .init(info: [])))
     }
 }
 
