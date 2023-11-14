@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ValidatorApp: App {
+    
+    private let dependencies: ValidatorAppDependencies = .init()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppCoordinator(viewModel: .init(dependencies: dependencies), navigation: .init(dependencies: dependencies))
         }
     }
 }
