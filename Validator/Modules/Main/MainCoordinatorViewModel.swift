@@ -16,9 +16,11 @@ extension MainCoordinator {
     
     enum CoordinatorRoutes {}
     
-    final class ViewModel: ObservableObject {
+    final class ViewModel: ObservableObject, UserInfoNavigation {
         
-        enum Routes {}
+        enum Routes: Hashable {
+            case welcomeScreen(name: String)
+        }
         
         typealias Dependencies = Any
         typealias CoordinatorNavigation = Any
@@ -52,6 +54,13 @@ extension MainCoordinator {
         }
         
         // MARK: - Public implementation
+        
+        func routeTo(_ destination: UserInfoView.Routes) {
+            switch destination {
+            case .welcomeScreen(let name):
+                navigationPath.append(.welcomeScreen(name: name))
+            }
+        }
         
         // MARK: - Private implementation
         

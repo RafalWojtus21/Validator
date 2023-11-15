@@ -15,13 +15,15 @@ protocol UserInfoNavigation {
 
 extension UserInfoView {
     
-    enum Routes {}
+    enum Routes {
+        case welcomeScreen(name: String)
+    }
     
     @MainActor
     final class ViewModel: ObservableObject {
         
         typealias Dependencies = Any
-        typealias Navigation = Any
+        typealias Navigation = UserInfoNavigation
         
         // MARK: - Properties
         
@@ -51,6 +53,10 @@ extension UserInfoView {
         }
         
         // MARK: - Public implementation
+        
+        func routeToWelcomeScreen() {
+            navigation.routeTo(.welcomeScreen(name: "Temporary name"))
+        }
         
         // MARK: - Private implementation
         

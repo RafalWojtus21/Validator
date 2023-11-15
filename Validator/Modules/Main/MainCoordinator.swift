@@ -27,12 +27,21 @@ struct MainCoordinator: View {
     // MARK: - User Interface
     
     var body: some View {
-        NavigationStack {
-            UserInfoView(viewModel: .init(dependencies: viewModel.dependencies, 
+        NavigationStack(path: $viewModel.navigationPath) {
+            UserInfoView(viewModel: .init(dependencies: viewModel.dependencies,
                                           navigation: viewModel,
-                                          userSetup: .init(info: userSetup), 
-                                          personalDetails: .init(info: personalDetails)), 
+                                          userSetup: .init(info: userSetup),
+                                          personalDetails: .init(info: personalDetails)),
                          validator: .init())
+                .navigationDestination(for: ViewModel.Routes.self, destination: { destination in
+                    switch destination {
+                    case .welcomeScreen(let name):
+                        WelcomeView(viewModel: .init(dependencies: viewModel.extendedDependencies,
+                                                     navigation: viewModel,
+                                                     name: name))
+                    }
+
+                })
         }
     }
     

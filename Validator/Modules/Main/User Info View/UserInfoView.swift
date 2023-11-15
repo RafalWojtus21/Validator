@@ -68,6 +68,7 @@ struct UserInfoView: View {
     
     private var confirmButton: some View {
         Button {
+            viewModel.routeToWelcomeScreen()
         } label: {
             HStack {
                 Image(systemName: "arrow.right")

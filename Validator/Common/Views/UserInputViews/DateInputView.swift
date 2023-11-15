@@ -29,10 +29,11 @@ struct DateInputView: View {
     
     private var datePicker: some View {
         DatePicker(
-            title,
+            title + ":",
             selection: $date,
             displayedComponents: [.date]
         )
+        .datePickerStyle(.compact)
         .onChange(of: date) { _, newValue in
             validate(newValue)
         }
