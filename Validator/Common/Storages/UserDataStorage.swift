@@ -9,21 +9,6 @@
 import Foundation
 import Combine
 
-
-protocol HasUserDataStorage {
-//    var userDataStorage: UserDataStorage { get }
-}
-
-//protocol UserDataStorage {
-
-//    func setName(_ name: UserName)
-//    func setEmail(_ email: UserEmail)
-//    func setBirthDate(_ date: UserBirthDate)
-//    func setHeight(_ height: UserHeight)
-//    func setWeight(_ weight: UserWeight)
-//
-//}
-
 @Observable final class UserDataStorageImpl {
     
     typealias UserName = String
@@ -31,7 +16,7 @@ protocol HasUserDataStorage {
     typealias UserBirthDate = Date
     typealias UserHeight = Int
     typealias UserWeight = Int
-
+    
     // MARK: - Properties
     
     private var userDataSubject: CurrentValueSubject<UserData?, Never> = .init(nil)
@@ -40,7 +25,7 @@ protocol HasUserDataStorage {
     private var userBirthDateSubject: CurrentValueSubject<UserBirthDate, Never> = .init(Date())
     private var userHeightSubject: CurrentValueSubject<UserHeight, Never> = .init(0)
     private var userWeightSubject: CurrentValueSubject<UserWeight, Never> = .init(0)
-
+    
     // MARK: - Initialization
     
     init() {}
@@ -82,7 +67,7 @@ protocol HasUserDataStorage {
     func fetchUserData() -> UserData? {
         userDataSubject.value
     }
-
+    
     // MARK: - Private implementation
     
 }
