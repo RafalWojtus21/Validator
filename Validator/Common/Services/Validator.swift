@@ -19,7 +19,7 @@ enum Validation {
 
         enum RegexPatterns: String {
             case email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            case name = "^[a-zA-Z]{3,40}$"
+            case name = "^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ]{3,40}$"
             case date = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[0-2])\\.\\d{4}$"
             case age = "^(8|9|[1-9][0-9]|1[0-2][0-9])"
             case height = "^[8-9][0-9]|1[0-9][0-9]|2[0-3][0-9]"
