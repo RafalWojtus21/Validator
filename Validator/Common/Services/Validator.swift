@@ -87,18 +87,23 @@ enum Validation {
     
     func validate(valuesId: ValuesId, _ type: Validation.ValidationType, input: String) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
+            var encounteredError = false
             if input.isEmpty {
                 self.validationDictionary[valuesId] = false
                 let message = Validation.Error(errorDescription: "Please enter valid" + " " + type.rawValue)
+                encounteredError = true
                 promise(.failure(message))
             } else {
                 for (predicate, errorMessage) in type.predicates where !predicate.evaluate(with: input) {
                     self.validationDictionary[valuesId] = false
                     let message = Validation.Error(errorDescription: errorMessage)
+                    encounteredError = true
                     promise(.failure(message))
                 }
-                self.validationDictionary[valuesId] = true
-                promise(.success(()))
+                if !encounteredError {
+                    self.validationDictionary[valuesId] = true
+                    promise(.success(()))
+                }
             }
         }
         .eraseToAnyPublisher()
@@ -120,8 +125,6 @@ extension ValidatorImpl {
                 let message = Validation.Error(errorDescription: errorMessage)
                 encounteredError = true
                 promise(.failure(message))
-                
-                break
             }
             if !encounteredError {
                 self.validationDictionary[valuesId] = true

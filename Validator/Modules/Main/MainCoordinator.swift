@@ -28,17 +28,16 @@ struct MainCoordinator: View {
     
     var body: some View {
         NavigationStack(path: $viewModel.navigationPath) {
-            UserInfoView(viewModel: .init(dependencies: viewModel.dependencies,
-                                          navigation: viewModel,
-                                          userSetup: .init(info: userSetup),
+            UserInfoView(viewModel: .init(dependencies: viewModel.extendedDependencies,
+                                          navigation: viewModel, userSetup: .init(info: userSetup),
                                           personalDetails: .init(info: personalDetails)),
-                         validator: .init())
+                         validator: .init(),
+                         userDataStorage: viewModel.extendedDependencies.userDataStorage)
                 .navigationDestination(for: ViewModel.Routes.self, destination: { destination in
                     switch destination {
-                    case .welcomeScreen(let name):
+                    case .welcomeScreen:
                         WelcomeView(viewModel: .init(dependencies: viewModel.extendedDependencies,
-                                                     navigation: viewModel,
-                                                     name: name))
+                                                     navigation: viewModel, userDataStorage: viewModel.extendedDependencies.userDataStorage))
                     }
 
                 })
@@ -53,6 +52,7 @@ struct MainCoordinator_Previews: PreviewProvider {
     }
 }
 
-fileprivate struct MockedDependencies: MainCoordinator.ViewModel.Dependencies {}
+fileprivate struct MockedDependencies: MainCoordinator.ViewModel.Dependencies {
+}
 
 fileprivate struct MockedNavigation {}

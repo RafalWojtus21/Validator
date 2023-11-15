@@ -12,6 +12,7 @@ struct StringInputView: View {
     
     @Binding var stringData: String
     @Environment(ValidatorImpl.self) private var validator
+    @Environment(UserDataStorageImpl.self) private var userDataStorage
     @State var subscribers: [AnyCancellable] = []
     @State var validationMessage = ""
     let valuesId: UUID
@@ -38,12 +39,9 @@ struct StringInputView: View {
     
     private func validate() {
         let validationType: Validation.ValidationType? = switch type {
-        case .email:
-                .email
-        case .name:
-                .name
-        default:
-                nil
+        case .email: .email
+        case .name: .name
+        default: nil
         }
         guard let validationType else { return }
         
@@ -57,6 +55,14 @@ struct StringInputView: View {
                 }
             } receiveValue: { _ in
                 self.validationMessage = ""
+                switch validationType {
+                case .email:
+                    userDataStorage.setEmail(stringData)
+                case .name:
+                    userDataStorage.setName(stringData)
+                default:
+                    break
+                }
             }
             .store(in: &subscribers)
     }

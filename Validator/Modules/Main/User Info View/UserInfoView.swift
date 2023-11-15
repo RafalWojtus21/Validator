@@ -12,8 +12,9 @@ struct UserInfoView: View {
     // MARK: - Properties
     
     @StateObject var viewModel: ViewModel
-    @State var validator: ValidatorImpl
     @State private var message = ""
+    @State var validator: ValidatorImpl
+    @State var userDataStorage: UserDataStorageImpl
     
     // MARK: - User Interface
     
@@ -53,6 +54,7 @@ struct UserInfoView: View {
             ForEach(viewModel.userSetup.info) {
                 UserInputViewProvider(userInfo: $0)
                     .environment(validator)
+                    .environment(userDataStorage)
             }
         }
     }
@@ -62,12 +64,14 @@ struct UserInfoView: View {
             ForEach(viewModel.personalDetails.info) {
                 UserInputViewProvider(userInfo: $0)
                     .environment(validator)
+                    .environment(userDataStorage)
             }
         }
     }
     
     private var confirmButton: some View {
         Button {
+            userDataStorage.saveUserData()
             viewModel.routeToWelcomeScreen()
         } label: {
             HStack {
@@ -88,11 +92,12 @@ struct UserInfoView: View {
 
 struct UserInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        UserInfoView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), userSetup: .init(info: []), personalDetails: .init(info: [])), validator: .init())
+        UserInfoView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), userSetup: .init(info: []), personalDetails: .init(info: [])), validator: .init(), userDataStorage: .init())
     }
 }
 
-fileprivate struct MockedDependencies: UserInfoView.ViewModel.Dependencies {}
+fileprivate struct MockedDependencies: UserInfoView.ViewModel.Dependencies {
+}
 
 fileprivate struct MockedNavigation: UserInfoView.ViewModel.Navigation {
     func routeTo(_: UserInfoView.Routes) {}

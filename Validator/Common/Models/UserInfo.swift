@@ -13,7 +13,6 @@ import Foundation
     let type: UserDataType
     let description: String
     
-    var boolData: Bool = false
     var dateTime: Date = .init()
     var stringData: String = ""
     var integerData: Int = 0

@@ -12,6 +12,7 @@ struct IntegerInputView: View {
     
     @Binding var integerData: Int
     @Environment(ValidatorImpl.self) private var validator
+    @Environment(UserDataStorageImpl.self) private var userDataStorage
     @State var subscribers: [AnyCancellable] = []
     @State var validationMessage = ""
     @State private var text: String = ""
@@ -64,12 +65,9 @@ struct IntegerInputView: View {
     
     private func validate() {
         let validationType: Validation.ValidationType? = switch type {
-        case .height:
-                .height
-        case .weight:
-                .weight
-        default:
-            nil
+        case .height: .height
+        case .weight: .weight
+        default: nil
         }
         guard let validationType else { return }
         
@@ -83,6 +81,14 @@ struct IntegerInputView: View {
                 }
             } receiveValue: { _ in
                 self.validationMessage = ""
+                switch validationType {
+                case .height:
+                    userDataStorage.setHeight(integerData)
+                case .weight:
+                    userDataStorage.setWeight(integerData)
+                default:
+                    break
+                }
             }
             .store(in: &subscribers)
     }

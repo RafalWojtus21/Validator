@@ -23,7 +23,6 @@
 		8B17515F2B037E7400C5028D /* MainCoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17515D2B037E7400C5028D /* MainCoordinatorViewModel.swift */; };
 		8B1751632B037F4800C5028D /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751622B037F4800C5028D /* LoggerExtension.swift */; };
 		8B17516E2B03869200C5028D /* UserInputViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17516D2B03869200C5028D /* UserInputViewProvider.swift */; };
-		8B1751712B03883B00C5028D /* UserDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751702B03883B00C5028D /* UserDataType.swift */; };
 		8B1751782B03890000C5028D /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751772B03890000C5028D /* DateInputView.swift */; };
 		8B17517B2B03890A00C5028D /* IntegerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751792B03890A00C5028D /* IntegerInputView.swift */; };
 		8B17517C2B03890A00C5028D /* StringInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17517A2B03890A00C5028D /* StringInputView.swift */; };
@@ -36,6 +35,8 @@
 		8B1751922B04ECCD00C5028D /* InputTextfieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751912B04ECCD00C5028D /* InputTextfieldModifier.swift */; };
 		8B1751982B04ED7B00C5028D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751962B04ED7B00C5028D /* WelcomeView.swift */; };
 		8B1751992B04ED7B00C5028D /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751972B04ED7B00C5028D /* WelcomeViewModel.swift */; };
+		8B17519C2B04F27200C5028D /* UserDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17519B2B04F27200C5028D /* UserDataStorage.swift */; };
+		8B1751A22B04FA9300C5028D /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1751A12B04FA9300C5028D /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +76,6 @@
 		8B17515D2B037E7400C5028D /* MainCoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorViewModel.swift; sourceTree = "<group>"; };
 		8B1751622B037F4800C5028D /* LoggerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
 		8B17516D2B03869200C5028D /* UserInputViewProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInputViewProvider.swift; sourceTree = "<group>"; };
-		8B1751702B03883B00C5028D /* UserDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataType.swift; sourceTree = "<group>"; };
 		8B1751772B03890000C5028D /* DateInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
 		8B1751792B03890A00C5028D /* IntegerInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerInputView.swift; sourceTree = "<group>"; };
 		8B17517A2B03890A00C5028D /* StringInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInputView.swift; sourceTree = "<group>"; };
@@ -88,6 +88,8 @@
 		8B1751912B04ECCD00C5028D /* InputTextfieldModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextfieldModifier.swift; sourceTree = "<group>"; };
 		8B1751962B04ED7B00C5028D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		8B1751972B04ED7B00C5028D /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		8B17519B2B04F27200C5028D /* UserDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStorage.swift; sourceTree = "<group>"; };
+		8B1751A12B04FA9300C5028D /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				8B17516F2B03883200C5028D /* Models */,
 				8B1751662B0383B000C5028D /* Views */,
 				8B1751612B037F3D00C5028D /* Extensions */,
+				8B17519A2B04F26800C5028D /* Storages */,
 				8B1751852B03BF1E00C5028D /* Services */,
 			);
 			path = Common;
@@ -238,9 +241,9 @@
 		8B17516F2B03883200C5028D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8B1751702B03883B00C5028D /* UserDataType.swift */,
 				8B17517D2B038BB100C5028D /* UserConfig.swift */,
 				8B1751812B03AF4E00C5028D /* UserInfo.swift */,
+				8B1751A12B04FA9300C5028D /* UserData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,6 +282,14 @@
 				8B1751972B04ED7B00C5028D /* WelcomeViewModel.swift */,
 			);
 			path = "Welcome Screen";
+			sourceTree = "<group>";
+		};
+		8B17519A2B04F26800C5028D /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				8B17519B2B04F27200C5028D /* UserDataStorage.swift */,
+			);
+			path = Storages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,7 +424,6 @@
 			files = (
 				8B1751162B0377F200C5028D /* ValidatorApp.swift in Sources */,
 				8B1751992B04ED7B00C5028D /* WelcomeViewModel.swift in Sources */,
-				8B1751712B03883B00C5028D /* UserDataType.swift in Sources */,
 				8B1751632B037F4800C5028D /* LoggerExtension.swift in Sources */,
 				8B17517E2B038BB100C5028D /* UserConfig.swift in Sources */,
 				8B17518D2B04CEAB00C5028D /* ValidationMessageView.swift in Sources */,
@@ -425,11 +435,13 @@
 				8B1751982B04ED7B00C5028D /* WelcomeView.swift in Sources */,
 				8B17515F2B037E7400C5028D /* MainCoordinatorViewModel.swift in Sources */,
 				8B1751482B037C8C00C5028D /* ValidatorAppDependencies.swift in Sources */,
+				8B17519C2B04F27200C5028D /* UserDataStorage.swift in Sources */,
 				8B1751552B037E3A00C5028D /* AppCoordinatorViewModel.swift in Sources */,
 				8B17517C2B03890A00C5028D /* StringInputView.swift in Sources */,
 				8B1751872B03BF2900C5028D /* Validator.swift in Sources */,
 				8B17517B2B03890A00C5028D /* IntegerInputView.swift in Sources */,
 				8B1751462B037C2700C5028D /* UserInfoViewModel.swift in Sources */,
+				8B1751A22B04FA9300C5028D /* UserData.swift in Sources */,
 				8B1751922B04ECCD00C5028D /* InputTextfieldModifier.swift in Sources */,
 				8B1751542B037E3A00C5028D /* AppCoordinatorNavigation.swift in Sources */,
 				8B1751802B03ADEF00C5028D /* NumberFormatterExtension.swift in Sources */,

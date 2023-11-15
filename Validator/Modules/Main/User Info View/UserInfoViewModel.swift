@@ -16,7 +16,7 @@ protocol UserInfoNavigation {
 extension UserInfoView {
     
     enum Routes {
-        case welcomeScreen(name: String)
+        case welcomeScreen
     }
     
     @MainActor
@@ -55,7 +55,7 @@ extension UserInfoView {
         // MARK: - Public implementation
         
         func routeToWelcomeScreen() {
-            navigation.routeTo(.welcomeScreen(name: "Temporary name"))
+            navigation.routeTo(.welcomeScreen)
         }
         
         // MARK: - Private implementation

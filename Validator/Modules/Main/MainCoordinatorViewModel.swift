@@ -19,7 +19,7 @@ extension MainCoordinator {
     final class ViewModel: ObservableObject, UserInfoNavigation {
         
         enum Routes: Hashable {
-            case welcomeScreen(name: String)
+            case welcomeScreen
         }
         
         typealias Dependencies = Any
@@ -27,10 +27,14 @@ extension MainCoordinator {
         typealias AllExtendedDependencies = Any
         
         final class ExtendedDependencies: Dependencies, AllExtendedDependencies  {
-            private let dependencies: Dependencies
             
+            private let dependencies: Dependencies
+            var userDataStorage: UserDataStorageImpl
+
             init(dependencies: Dependencies, navigation: CoordinatorNavigation) {
                 self.dependencies = dependencies
+                
+                userDataStorage = UserDataStorageImpl()
             }
         }
         
@@ -57,8 +61,8 @@ extension MainCoordinator {
         
         func routeTo(_ destination: UserInfoView.Routes) {
             switch destination {
-            case .welcomeScreen(let name):
-                navigationPath.append(.welcomeScreen(name: name))
+            case .welcomeScreen:
+                navigationPath.append(.welcomeScreen)
             }
         }
         

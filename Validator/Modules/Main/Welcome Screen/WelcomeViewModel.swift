@@ -27,17 +27,19 @@ extension WelcomeView {
         
         private(set) var dependencies: Dependencies
         private(set) var navigation: Navigation
+        private var userDataStorage: UserDataStorageImpl
         
         // MARK: - UI Properties
         
-        @Published var name: String
-        
+        @Published var userData: UserData?
+                
         // MARK: - Initialization
         
-        init(dependencies: Dependencies, navigation: Navigation, name: String) {
+        init(dependencies: Dependencies, navigation: Navigation, userDataStorage: UserDataStorageImpl) {
             self.dependencies = dependencies
             self.navigation = navigation
-            self.name = name
+            self.userDataStorage = userDataStorage
+            fetch()
             Logger.memory.info("WelcomeViewModel Dependencies init")
         }
         
@@ -48,6 +50,10 @@ extension WelcomeView {
         // MARK: - Public implementation
         
         // MARK: - Private implementation
+        
+        private func fetch() {
+            userData = userDataStorage.fetchUserData()
+        }
         
     }
     

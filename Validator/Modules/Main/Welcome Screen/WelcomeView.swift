@@ -16,18 +16,37 @@ struct WelcomeView: View {
     // MARK: - User Interface
     
     var body: some View {
-        Text(viewModel.name)
+        ZStack {
+            Color.mint
+                .ignoresSafeArea()
+            
+            VStack {
+                Spacer()
+                
+                Text("All data set, \(viewModel.userData?.name ?? ""). Let's begin!")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                
+                Spacer()
+            }
+        }
     }
     
 }
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), name: "Jack"))
+        let userDataStorage = UserDataStorageImpl()
+        WelcomeView(viewModel: .init(dependencies: MockedDependencies(), navigation: MockedNavigation(), userDataStorage: userDataStorage))
     }
 }
 
-fileprivate struct MockedDependencies: WelcomeView.ViewModel.Dependencies {}
+fileprivate struct MockedDependencies: WelcomeView.ViewModel.Dependencies {
+}
 
 fileprivate struct MockedNavigation: WelcomeView.ViewModel.Navigation {
     func routeTo(_: WelcomeView.Routes) {}

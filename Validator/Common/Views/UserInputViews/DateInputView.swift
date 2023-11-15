@@ -12,6 +12,7 @@ struct DateInputView: View {
     
     @Binding var date: Date
     @Environment(ValidatorImpl.self) private var validator
+    @Environment(UserDataStorageImpl.self) private var userDataStorage
     @State var subscribers: [AnyCancellable] = []
     @State var validationMessage = ""
     @State var ageRestrictionMessage = "You must be at least 8 years old to register. Please select a valid birth date."
@@ -21,6 +22,7 @@ struct DateInputView: View {
     var body: some View {
         VStack(spacing: 10) {
             ageRestrictionText
+                .frame(height: 40)
             datePicker
             ValidationMessageView(validationMessage)
                 .frame(height: 20)
@@ -59,6 +61,7 @@ struct DateInputView: View {
             } receiveValue: { _ in
                 self.validationMessage = ""
                 ageRestrictionMessage = ""
+                userDataStorage.setBirthDate(input)
             }
             .store(in: &subscribers)
     }

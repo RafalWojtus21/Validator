@@ -24,4 +24,5 @@ struct AppCoordinator: View {
 }
 
 
-fileprivate struct MockedDependencies: AppDependencies {}
+fileprivate struct MockedDependencies: AppDependencies {
+}
